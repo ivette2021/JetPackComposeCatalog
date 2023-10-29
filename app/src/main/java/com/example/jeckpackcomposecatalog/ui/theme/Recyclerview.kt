@@ -17,7 +17,6 @@ fun SimpleRecyclerView() {
         }
         items(myList) {
             Text(text = "Hola me llamo $it", fontSize = 18.sp)
-
         }
         item{ Text(text = "Pie de pagina", fontWeight = FontWeight.Bold, fontSize = 20.sp)}
     }
