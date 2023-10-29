@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun SimpleRecyclerView() {
-    val myList = listOf("Ariel", "Pepe", "Manuel", "James", "Monica", "Jules","Chandler", "Jessica")
+    val myList = listOf("Ariel", "Pepa", "Manuel", "James", "Monica", "Jules","Chandler", "Jessica")
     LazyColumn{
         item { Text(text = "Encabezado", fontWeight = FontWeight.Bold, fontSize = 20.sp)}
         items(100) {
@@ -17,6 +17,7 @@ fun SimpleRecyclerView() {
         }
         items(myList) {
             Text(text = "Hola me llamo $it", fontSize = 18.sp)
+
         }
         item{ Text(text = "Pie de pagina", fontWeight = FontWeight.Bold, fontSize = 20.sp)}
     }
