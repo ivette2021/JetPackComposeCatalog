@@ -3,15 +3,20 @@ package com.example.jeckpackcomposecatalog.ui.theme
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
@@ -43,23 +48,41 @@ fun SimpleRecyclerView() {
         item { Text(text = "Pie de pagina", fontWeight = FontWeight.Bold, fontSize = 20.sp) }
     }
 }
-
 @Composable
 fun SuperHeroView() {
     val context = LocalContext.current
     //LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {//para que sea horizontal el recycler
-        LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {//para que sea vertical
+    LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {//para que sea vertical
         items(getSuperheroes()) { superhero ->
-            ItemHero(superhero = superhero){
-                Toast.makeText(context, it.superheroName, Toast.LENGTH_SHORT).show()// mostrar un mensaje cuando se hace click sobre la imagen
+            ItemHero(superhero = superhero) {
+                Toast.makeText(context, it.superheroName, Toast.LENGTH_SHORT)
+                    .show()// mostrar un mensaje cuando se hace click sobre la imagen
             }
         }
     }
 }
 
+
 @Composable
-fun ItemHero(superhero: Superhero, onItemSelected:(Superhero)-> Unit) {
-    Card(border = BorderStroke(2.dp, Color(0xFF993535)), modifier = Modifier.width(200.dp).clickable { onItemSelected(superhero) }) {
+fun SuperHeroGridView() {
+    val context = LocalContext.current
+    LazyVerticalGrid(columns = GridCells.Fixed(2), content ={
+        items(getSuperheroes()){ superhero ->
+            ItemHero(superhero = superhero)
+            {Toast.makeText(context,it.realName,Toast.LENGTH_SHORT).show()}
+
+        }
+    }, contentPadding = PaddingValues(horizontal = 16.dp,vertical = 8.dp)) //margen de afuera del conjunto de imagenes
+}
+
+
+@Composable
+fun ItemHero(superhero: Superhero, onItemSelected: (Superhero) -> Unit) {
+    Card(
+        border = BorderStroke(2.dp, Color(0xFF993535)),
+        modifier = Modifier
+            .width(200.dp)
+            .clickable { onItemSelected(superhero) }.padding(top = 8.dp,bottom = 8.dp, end= 16.dp, start = 16.dp)) {
         Column {
             Image(
                 painter = painterResource(id = superhero.photo),
@@ -67,15 +90,25 @@ fun ItemHero(superhero: Superhero, onItemSelected:(Superhero)-> Unit) {
                 modifier = Modifier.fillMaxWidth(),
                 contentScale = ContentScale.Crop //coger el ancho que necesite para crecer
             )
-            Text(text = superhero.superheroName,
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            fontSize = 12.sp)
-
-            Text(text = superhero.realName,
+            Text(
+                text = superhero.superheroName,
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                fontSize = 12.sp)
+                fontSize = 12.sp
+            )
 
-            Text(text = superhero.publisher, fontSize = 10.sp, modifier = Modifier .align(Alignment.End).padding(8.dp))//iferior der
+            Text(
+                text = superhero.realName,
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                fontSize = 12.sp
+            )
+
+            Text(
+                text = superhero.publisher,
+                fontSize = 10.sp,
+                modifier = Modifier
+                    .align(Alignment.End)
+                    .padding(8.dp)
+            )//iferior der
         }
     }
 }
