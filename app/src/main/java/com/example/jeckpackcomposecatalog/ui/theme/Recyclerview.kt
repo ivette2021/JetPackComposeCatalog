@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -66,6 +67,31 @@ fun SuperHeroView() {
                     .show()// mostrar un mensaje cuando se hace click sobre la imagen
             }
         }
+    }
+}
+
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun SuperHeroStickyView() {
+    val context = LocalContext.current
+    val superhero = getSuperheroes().groupBy { it.publisher }//para hacer un sticky necesitamos un map (agrupen por un parametro)
+    LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+
+superhero.forEach{(publisher, mySuperhero) ->
+    
+    stickyHeader {
+        Text(text = publisher, modifier = Modifier.fillMaxWidth().background(Color.LightGray))
+    }
+    
+    items(mySuperhero) { superhero ->
+        ItemHero(superhero = superhero) {
+            Toast.makeText(context, it.superheroName, Toast.LENGTH_SHORT)
+                .show()// mostrar un mensaje cuando se hace click sobre la imagen
+        }
+    }
+}
+
     }
 }
 
@@ -134,7 +160,7 @@ fun ItemHero(superhero: Superhero, onItemSelected: (Superhero) -> Unit) {
     Card(
         border = BorderStroke(2.dp, Color(0xFF993535)),
         modifier = Modifier
-            .width(200.dp)
+            .fillMaxWidth() //corrige de que la columna no se viera completa
             .clickable { onItemSelected(superhero) }
             .padding(top = 8.dp, bottom = 8.dp, end = 16.dp, start = 16.dp)) {
         Column {

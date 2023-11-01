@@ -90,6 +90,7 @@ import com.example.jeckpackcomposecatalog.ui.theme.MyRangeSlider
 import com.example.jeckpackcomposecatalog.ui.theme.MySimpleCustomDialog
 import com.example.jeckpackcomposecatalog.ui.theme.SimpleRecyclerView
 import com.example.jeckpackcomposecatalog.ui.theme.SuperHeroGridView
+import com.example.jeckpackcomposecatalog.ui.theme.SuperHeroStickyView
 import com.example.jeckpackcomposecatalog.ui.theme.SuperHeroView
 import com.example.jeckpackcomposecatalog.ui.theme.SuperHeroWithSpecialControlssView
 
@@ -154,7 +155,8 @@ class MainActivity : ComponentActivity() {
                    // SimpleRecyclerView()
                     //SuperHeroView()
                     //SuperHeroGridView()
-                    SuperHeroWithSpecialControlssView()
+                    //SuperHeroWithSpecialControlssView()
+                    SuperHeroStickyView()
                     }
                 }
             }
