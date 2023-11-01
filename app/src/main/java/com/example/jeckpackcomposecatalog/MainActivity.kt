@@ -88,6 +88,7 @@ import com.example.jeckpackcomposecatalog.ui.theme.MyConfirmationDialog
 import com.example.jeckpackcomposecatalog.ui.theme.MyCustomDialog
 import com.example.jeckpackcomposecatalog.ui.theme.MyRangeSlider
 import com.example.jeckpackcomposecatalog.ui.theme.MySimpleCustomDialog
+import com.example.jeckpackcomposecatalog.ui.theme.ScaffoldExample
 import com.example.jeckpackcomposecatalog.ui.theme.SimpleRecyclerView
 import com.example.jeckpackcomposecatalog.ui.theme.SuperHeroGridView
 import com.example.jeckpackcomposecatalog.ui.theme.SuperHeroStickyView
@@ -101,67 +102,18 @@ class MainActivity : ComponentActivity() {
             JeckPackComposeCatalogTheme {
                 // A surface container using the 'background' color from the theme
                 //var selected by remember {//estaba abajo en el radio button list
-                  //  mutableStateOf("si")
-                }
-                Surface(
-                    // modifier = Modifier.fillMaxSize(), //se silencia si se usa dropdownmenu
-                    color = MaterialTheme.colorScheme.background
-                ) {
-
-                    /* var status by rememberSaveable { mutableStateOf(false)} //instancia solo un objeto
-                     val checkInfo = CheckInfo(
-                         title = "Este es el bueno",
-                         selected = status,
-                         //onCheckedChange = { status = it} //estamos seteando un nuevo valor, devuelve un boolean que seria it
-                         onCheckedChange = {myNewStatus -> status = myNewStatus} //se cambio it por mynew status
-                     )*/
-                    // val myOptions = getOptions(listOf("si", "no", "no lo se", "me es indiferente"))
-                   // Column { //momentaneamente colocamos esto para que outlines no abarque toda la pantalla, debido a que no hay otros elementos
-                        //MyTextFieldOutlined()
-                        //MyButtonExample()
-                        //MyImage()
-                        //MyIcon()
-                        //MyProgress
-                        //MyProgressAdvance()
-                        //MySwitch()
-                        //MyCheckBox()
-                        //MyCheckBoxWithText()
-                        //MyCheckBoxWithText()
-                        //MyCheckBoxWithTextCompleted(checkInfo)
-                        /*MyTriStatusCheckBox()
-
-                        myOptions.forEach {
-                            MyCheckBoxWithTextCompleted(it)
-                        }//por c/u de los objetos de tipo Checkinfo que tenga vamos a crear  un componente MyCheckBoxWithTextComplete
-                          */
-                        //MyRadioButtonList(selected){selected = it}
-                        //MyCard()
-                        //MyDivider()
-                        // MyBadgeBox()
-                        //MyDivider()
-                        //MyDropDownMenu()
-                    //BasicSlider()
-                    //AdvanceSlider()
-                    //MyRangeSlider()
-                    /*var show by remember { //aqui generamos el boton para mostrar el dialog
-                        mutableStateOf(false)}
-                   Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                       Button(onClick = {show = true}) {
-                           Text(text = "Mostrar dialogo")
-                       }
-                   }
-                   // MyCustomDialog(show = show, onDismiss = {show = false})
-                    MyConfirmationDialog(show = show, onDismiss = {show = false})*/
-                   // SimpleRecyclerView()
-                    //SuperHeroView()
-                    //SuperHeroGridView()
-                    //SuperHeroWithSpecialControlssView()
-                    SuperHeroStickyView()
-                    }
-                }
+                //  mutableStateOf("si")
+            }
+            Surface(
+                // modifier = Modifier.fillMaxSize(), //se silencia si se usa dropdownmenu
+                color = MaterialTheme.colorScheme.background
+            ) {
+                ScaffoldExample()
             }
         }
-  //  } //column
+    }
+}
+//  } //column
 //} // var
 
 @Composable
@@ -193,15 +145,17 @@ fun MyDropDownMenu() {
         {
             desserts.forEach { dessert ->
                 DropdownMenuItem(
-                    text = { Text(text = dessert)},
-                    onClick = {expanded = false
-                    selectedText = dessert}
+                    text = { Text(text = dessert) },
+                    onClick = {
+                        expanded = false
+                        selectedText = dessert
+                    }
                 )
-                }
-
             }
+
         }
     }
+}
 
 
 @OptIn(ExperimentalMaterial3Api::class)
