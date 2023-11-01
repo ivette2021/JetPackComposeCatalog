@@ -8,6 +8,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.runtime.*
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -18,9 +19,13 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jeckpackcomposecatalog.Model.Superhero
 import com.example.jeckpackcomposecatalog.R
+import kotlinx.coroutines.launch
 
 @Composable
 fun SimpleRecyclerView() {
@@ -48,6 +54,7 @@ fun SimpleRecyclerView() {
         item { Text(text = "Pie de pagina", fontWeight = FontWeight.Bold, fontSize = 20.sp) }
     }
 }
+
 @Composable
 fun SuperHeroView() {
     val context = LocalContext.current
@@ -62,17 +69,63 @@ fun SuperHeroView() {
     }
 }
 
+@Composable
+fun SuperHeroWithSpecialControlssView() {
+    val context = LocalContext.current
+    val rvState = rememberLazyListState() //controla el estado del recycler view
+    val coroutinesScope = rememberCoroutineScope()
+    Column {
+        LazyColumn(
+            state = rvState,
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.weight(1f)
+        ) {//como no se vera el boton le colocaremos un peso al rv
+            items(getSuperheroes()) { superhero ->
+                ItemHero(superhero = superhero) {
+                    Toast.makeText(context, it.superheroName, Toast.LENGTH_SHORT)
+                        .show()// mostrar un mensaje cuando se hace click sobre la imagen
+                }
+            }
+        }
+        val showbutton by remember {
+            derivedStateOf { //optimiza la recomposicion de la vista
+                rvState.firstVisibleItemIndex > 0  //verifica si llegaste al final del scroll
+            }
+        }
+
+        remember { derivedStateOf { rvState.firstVisibleItemScrollOffset } } //nos da un valor dependiendo del sitio en el que estemos
+
+        if (showbutton) {
+
+            Button(
+                onClick = {coroutinesScope.launch { rvState.animateScrollToItem(0) } }, //al hacer click en el boton te devuelve al principio de la pagina
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(16.dp)
+            ) {
+                Text(text = "subir")
+            }
+        }
+
+    }
+
+}
+
 
 @Composable
 fun SuperHeroGridView() {
     val context = LocalContext.current
-    LazyVerticalGrid(columns = GridCells.Fixed(2), content ={
-        items(getSuperheroes()){ superhero ->
-            ItemHero(superhero = superhero)
-            {Toast.makeText(context,it.realName,Toast.LENGTH_SHORT).show()}
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        content = {
+            items(getSuperheroes()) { superhero ->
+                ItemHero(superhero = superhero)
+                { Toast.makeText(context, it.realName, Toast.LENGTH_SHORT).show() }
 
-        }
-    }, contentPadding = PaddingValues(horizontal = 16.dp,vertical = 8.dp)) //margen de afuera del conjunto de imagenes
+            }
+        },
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+    ) //margen de afuera del conjunto de imagenes
 }
 
 
@@ -82,7 +135,8 @@ fun ItemHero(superhero: Superhero, onItemSelected: (Superhero) -> Unit) {
         border = BorderStroke(2.dp, Color(0xFF993535)),
         modifier = Modifier
             .width(200.dp)
-            .clickable { onItemSelected(superhero) }.padding(top = 8.dp,bottom = 8.dp, end= 16.dp, start = 16.dp)) {
+            .clickable { onItemSelected(superhero) }
+            .padding(top = 8.dp, bottom = 8.dp, end = 16.dp, start = 16.dp)) {
         Column {
             Image(
                 painter = painterResource(id = superhero.photo),

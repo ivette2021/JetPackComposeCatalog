@@ -91,6 +91,7 @@ import com.example.jeckpackcomposecatalog.ui.theme.MySimpleCustomDialog
 import com.example.jeckpackcomposecatalog.ui.theme.SimpleRecyclerView
 import com.example.jeckpackcomposecatalog.ui.theme.SuperHeroGridView
 import com.example.jeckpackcomposecatalog.ui.theme.SuperHeroView
+import com.example.jeckpackcomposecatalog.ui.theme.SuperHeroWithSpecialControlssView
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -152,7 +153,8 @@ class MainActivity : ComponentActivity() {
                     MyConfirmationDialog(show = show, onDismiss = {show = false})*/
                    // SimpleRecyclerView()
                     //SuperHeroView()
-                    SuperHeroGridView()
+                    //SuperHeroGridView()
+                    SuperHeroWithSpecialControlssView()
                     }
                 }
             }
