@@ -1,18 +1,14 @@
 @file:OptIn(
-    ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class,
-    ExperimentalMaterial3Api::class
+    ExperimentalMaterial3Api::class,
 )
 
 package com.example.jeckpackcomposecatalog
 
 import android.os.Bundle
-import android.text.style.BackgroundColorSpan
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -26,18 +22,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material3.Badge
-import androidx.compose.material3.BadgeDefaults
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -60,7 +53,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TriStateCheckbox
-import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -80,32 +72,18 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.jeckpackcomposecatalog.ui.theme.AdvanceSlider
-import com.example.jeckpackcomposecatalog.ui.theme.BasicSlider
 import com.example.jeckpackcomposecatalog.ui.theme.CheckInfo
 import com.example.jeckpackcomposecatalog.ui.theme.JeckPackComposeCatalogTheme
-import com.example.jeckpackcomposecatalog.ui.theme.MyConfirmationDialog
-import com.example.jeckpackcomposecatalog.ui.theme.MyCustomDialog
-import com.example.jeckpackcomposecatalog.ui.theme.MyRangeSlider
-import com.example.jeckpackcomposecatalog.ui.theme.MySimpleCustomDialog
+import com.example.jeckpackcomposecatalog.ui.theme.MyBottomNavigation
 import com.example.jeckpackcomposecatalog.ui.theme.ScaffoldExample
-import com.example.jeckpackcomposecatalog.ui.theme.SimpleRecyclerView
-import com.example.jeckpackcomposecatalog.ui.theme.SuperHeroGridView
-import com.example.jeckpackcomposecatalog.ui.theme.SuperHeroStickyView
-import com.example.jeckpackcomposecatalog.ui.theme.SuperHeroView
-import com.example.jeckpackcomposecatalog.ui.theme.SuperHeroWithSpecialControlssView
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             JeckPackComposeCatalogTheme {
-                // A surface container using the 'background' color from the theme
-                //var selected by remember {//estaba abajo en el radio button list
-                //  mutableStateOf("si")
             }
             Surface(
-                // modifier = Modifier.fillMaxSize(), //se silencia si se usa dropdownmenu
                 color = MaterialTheme.colorScheme.background
             ) {
                 ScaffoldExample()
@@ -113,9 +91,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-//  } //column
-//} // var
-
 @Composable
 fun MyDropDownMenu() {
 
