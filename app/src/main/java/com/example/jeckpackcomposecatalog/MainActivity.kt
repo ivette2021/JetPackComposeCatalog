@@ -86,6 +86,7 @@ import com.example.jeckpackcomposecatalog.ui.theme.Screen1
 import com.example.jeckpackcomposecatalog.ui.theme.Screen2
 import com.example.jeckpackcomposecatalog.ui.theme.Screen3
 import com.example.jeckpackcomposecatalog.ui.theme.Screen4
+import com.example.jeckpackcomposecatalog.ui.theme.Screen5
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -108,15 +109,26 @@ class MainActivity : ComponentActivity() {
                     composable(Routes.Screen3.route) { Screen3(navigationController) }
                     //composable("pantalla4/{name}") { backStackEntry -> era para el String
                     composable(
-                       // "screen4/{age}",
+                        // "screen4/{age}",
                         Routes.Screen4.route,
-                        arguments = listOf(navArgument("age") { type = NavType.IntType })
+                        arguments = listOf(navArgument("age") { type = NavType.IntType }) //definimos el tipo de valor
                     ) { backStackEntry ->
                         Screen4(
                             navigationController,
                             //backStackEntry.arguments?.getString("name").orEmpty()
                             backStackEntry.arguments?.getInt("age") ?: 0
                         )
+                    }
+                    composable(
+                        Routes.Screen5.route,
+                        arguments = listOf(navArgument("name") { defaultValue = "Ivi" })//aqui definimos el valor inicial
+                    )
+                    { backStackEntry ->
+                        Screen5(
+                            navigationController,
+                            backStackEntry.arguments?.getString("name")
+                        )
+
                     }
                 }
 
