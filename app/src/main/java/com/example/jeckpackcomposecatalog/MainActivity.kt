@@ -75,6 +75,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.jeckpackcomposecatalog.Model.Routes
 import com.example.jeckpackcomposecatalog.ui.theme.CheckInfo
 import com.example.jeckpackcomposecatalog.ui.theme.JeckPackComposeCatalogTheme
 import com.example.jeckpackcomposecatalog.ui.theme.MyBottomNavigation
@@ -93,11 +94,11 @@ class MainActivity : ComponentActivity() {
                 color = MaterialTheme.colorScheme.background
             ) {
                val navigationController = rememberNavController()//gestiona los estados de navegacion
-                NavHost(navController = navigationController, startDestination = "screen1" ) {
+                NavHost(navController = navigationController, startDestination = Routes.Screen1.route ) {
                     //debemos designar una id
-                    composable("screen1"){ Screen1(navigationController) }
-                    composable("screen2"){ Screen2(navigationController) }
-                    composable("screen3"){ Screen3(navigationController) }
+                    composable(Routes.Screen1.route){ Screen1(navigationController) }
+                    composable(Routes.Screen2.route){ Screen2(navigationController) }
+                    composable(Routes.Screen3.route){ Screen3(navigationController) }
                 }
 
             }
