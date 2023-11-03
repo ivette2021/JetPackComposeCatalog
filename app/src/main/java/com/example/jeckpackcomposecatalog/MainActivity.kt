@@ -72,9 +72,11 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.jeckpackcomposecatalog.Model.Routes
 import com.example.jeckpackcomposecatalog.ui.theme.CheckInfo
 import com.example.jeckpackcomposecatalog.ui.theme.JeckPackComposeCatalogTheme
@@ -83,6 +85,7 @@ import com.example.jeckpackcomposecatalog.ui.theme.ScaffoldExample
 import com.example.jeckpackcomposecatalog.ui.theme.Screen1
 import com.example.jeckpackcomposecatalog.ui.theme.Screen2
 import com.example.jeckpackcomposecatalog.ui.theme.Screen3
+import com.example.jeckpackcomposecatalog.ui.theme.Screen4
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,18 +96,31 @@ class MainActivity : ComponentActivity() {
             Surface(
                 color = MaterialTheme.colorScheme.background
             ) {
-               val navigationController = rememberNavController()//gestiona los estados de navegacion
-                NavHost(navController = navigationController, startDestination = Routes.Screen1.route ) {
+                val navigationController =
+                    rememberNavController()//gestiona los estados de navegacion
+                NavHost(
+                    navController = navigationController,
+                    startDestination = Routes.Screen1.route
+                ) {
                     //debemos designar una id
-                    composable(Routes.Screen1.route){ Screen1(navigationController) }
-                    composable(Routes.Screen2.route){ Screen2(navigationController) }
-                    composable(Routes.Screen3.route){ Screen3(navigationController) }
+                    composable(Routes.Screen1.route) { Screen1(navigationController) }
+                    composable(Routes.Screen2.route) { Screen2(navigationController) }
+                    composable(Routes.Screen3.route) { Screen3(navigationController) }
+                    //composable("pantalla4/{name}") { backStackEntry -> era para el String
+                        composable("pantalla4/{name}", arguments= listOf(navArgument("name"){type = NavType.IntType})) { backStackEntry ->
+                        Screen4(
+                            navigationController,
+                            //backStackEntry.arguments?.getString("name").orEmpty()
+                            backStackEntry.arguments?.getInt("name")?:0
+                        )
+                    }
                 }
 
             }
         }
     }
 }
+
 @Composable
 fun MyDropDownMenu() {
 
