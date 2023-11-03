@@ -56,17 +56,17 @@ fun Screen3(navController: NavHostController) {
             text = "Pantalla 3",
             modifier = Modifier
                 .align(Alignment.Center)
-                .clickable { navController.navigate("pantalla4/2") }) //como cambiamos los parameteros de string a int va un 2 en vez de un nombre
+                .clickable { navController.navigate(Routes.Screen4.createRoute(26)) }) //cambiamos la forma de navegar
     }
 }
 
 @Composable
-fun Screen4(navController: NavHostController, name: Int) { //obliogatorio o no funciona la app se cambio String por Int para probar otro parametro
+fun Screen4(navController: NavHostController, age: Int) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
     ) {
-        Text(text = name.toString(), modifier = Modifier.align(Alignment.Center))//se agrego el casteo
+        Text(text = "Tengo $age años", modifier = Modifier.align(Alignment.Center))
     }
 }
