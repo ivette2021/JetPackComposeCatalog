@@ -72,10 +72,16 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.jeckpackcomposecatalog.ui.theme.CheckInfo
 import com.example.jeckpackcomposecatalog.ui.theme.JeckPackComposeCatalogTheme
 import com.example.jeckpackcomposecatalog.ui.theme.MyBottomNavigation
 import com.example.jeckpackcomposecatalog.ui.theme.ScaffoldExample
+import com.example.jeckpackcomposecatalog.ui.theme.Screen1
+import com.example.jeckpackcomposecatalog.ui.theme.Screen2
+import com.example.jeckpackcomposecatalog.ui.theme.Screen3
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,7 +92,14 @@ class MainActivity : ComponentActivity() {
             Surface(
                 color = MaterialTheme.colorScheme.background
             ) {
-                ScaffoldExample()
+               val navigationController = rememberNavController()//gestiona los estados de navegacion
+                NavHost(navController = navigationController, startDestination = "screen1" ) {
+                    //debemos designar una id
+                    composable("screen1"){ Screen1(navigationController) }
+                    composable("screen2"){ Screen2(navigationController) }
+                    composable("screen3"){ Screen3(navigationController) }
+                }
+
             }
         }
     }
