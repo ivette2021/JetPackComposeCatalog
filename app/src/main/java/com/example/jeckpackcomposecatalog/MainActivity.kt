@@ -80,6 +80,7 @@ import androidx.navigation.navArgument
 import com.example.jeckpackcomposecatalog.Model.Routes
 import com.example.jeckpackcomposecatalog.ui.theme.CheckInfo
 import com.example.jeckpackcomposecatalog.ui.theme.ColorAnimationSimple
+import com.example.jeckpackcomposecatalog.ui.theme.CrossfadeExampleAnimation
 import com.example.jeckpackcomposecatalog.ui.theme.JeckPackComposeCatalogTheme
 import com.example.jeckpackcomposecatalog.ui.theme.MyBottomNavigation
 import com.example.jeckpackcomposecatalog.ui.theme.ScaffoldExample
@@ -100,7 +101,7 @@ class MainActivity : ComponentActivity() {
             Surface(
                 color = MaterialTheme.colorScheme.background
             ) {
-             VisibilityAnimation()
+             CrossfadeExampleAnimation()
             }
         }
     }
