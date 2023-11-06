@@ -1,5 +1,6 @@
 package com.example.jeckpackcomposecatalog.ui.theme
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
@@ -62,7 +63,7 @@ fun VisibilityAnimation(){
         }
         Spacer(modifier = Modifier.size(50.dp))
 
-        if (isVisible){
+       AnimatedVisibility (isVisible){
         Box(Modifier.size(150.dp).background(Color.Red))
 
         }
