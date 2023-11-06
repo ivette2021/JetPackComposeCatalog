@@ -1,6 +1,7 @@
 package com.example.jeckpackcomposecatalog.ui.theme
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -35,18 +36,15 @@ fun ColorAnimationSimple(){
             .background(realColor)
             .clickable { firstColor = !firstColor })
     }
-
-//        Spacer(modifier = Modifier.size(200.dp))
-//
-//        var secondColor by rememberSaveable{
-//            mutableStateOf(false)
-//        }
-//        val realColor2 by animateColorAsState(targetValue = if (secondColor) Color.Red else Color.Yellow )
-//        Box(modifier = Modifier
-//            .size(100.dp)
-//            .background(realColor2)
-//            .clickable { secondColor = !secondColor })
-
-
-
+}
+@Composable
+fun SizeAnimation(){
+    var smallSize by rememberSaveable {
+        mutableStateOf(true)
+    }
+    val size by animateDpAsState(targetValue = if(smallSize) 50.dp else 100.dp)
+    Box(modifier = Modifier
+        .size(size)
+        .background(Color.Cyan)
+        .clickable { smallSize = !smallSize })
 }
