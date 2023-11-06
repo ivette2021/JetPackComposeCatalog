@@ -79,6 +79,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.jeckpackcomposecatalog.Model.Routes
 import com.example.jeckpackcomposecatalog.ui.theme.CheckInfo
+import com.example.jeckpackcomposecatalog.ui.theme.ColorAnimationSimple
 import com.example.jeckpackcomposecatalog.ui.theme.JeckPackComposeCatalogTheme
 import com.example.jeckpackcomposecatalog.ui.theme.MyBottomNavigation
 import com.example.jeckpackcomposecatalog.ui.theme.ScaffoldExample
@@ -97,40 +98,9 @@ class MainActivity : ComponentActivity() {
             Surface(
                 color = MaterialTheme.colorScheme.background
             ) {
-                val navigationController =
-                    rememberNavController()//gestiona los estados de navegacion
-                NavHost(
-                    navController = navigationController,
-                    startDestination = Routes.Screen1.route
-                ) {
-                    //debemos designar una id
-                    composable(Routes.Screen1.route) { Screen1(navigationController) }
-                    composable(Routes.Screen2.route) { Screen2(navigationController) }
-                    composable(Routes.Screen3.route) { Screen3(navigationController) }
-                    //composable("pantalla4/{name}") { backStackEntry -> era para el String
-                    composable(
-                        // "screen4/{age}",
-                        Routes.Screen4.route,
-                        arguments = listOf(navArgument("age") { type = NavType.IntType }) //definimos el tipo de valor
-                    ) { backStackEntry ->
-                        Screen4(
-                            navigationController,
-                            //backStackEntry.arguments?.getString("name").orEmpty()
-                            backStackEntry.arguments?.getInt("age") ?: 0
-                        )
-                    }
-                    composable(
-                        Routes.Screen5.route,
-                        arguments = listOf(navArgument("name") { defaultValue = "Ivi" })//aqui definimos el valor inicial
-                    )
-                    { backStackEntry ->
-                        Screen5(
-                            navigationController,
-                            backStackEntry.arguments?.getString("name")
-                        )
+               ColorAnimationSimple()
 
-                    }
-                }
+
 
             }
         }
