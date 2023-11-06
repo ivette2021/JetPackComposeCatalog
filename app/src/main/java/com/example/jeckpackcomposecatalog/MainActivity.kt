@@ -89,6 +89,7 @@ import com.example.jeckpackcomposecatalog.ui.theme.Screen3
 import com.example.jeckpackcomposecatalog.ui.theme.Screen4
 import com.example.jeckpackcomposecatalog.ui.theme.Screen5
 import com.example.jeckpackcomposecatalog.ui.theme.SizeAnimation
+import com.example.jeckpackcomposecatalog.ui.theme.VisibilityAnimation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,7 +100,7 @@ class MainActivity : ComponentActivity() {
             Surface(
                 color = MaterialTheme.colorScheme.background
             ) {
-             SizeAnimation()
+             VisibilityAnimation()
             }
         }
     }
